@@ -1,0 +1,952 @@
+[
+  {
+    "code": "arg.1",
+    "label": "Argentina",
+    "teams": [
+      {
+        "id": "9739",
+        "name": "Aldosivi",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/9739.png"
+      },
+      {
+        "id": "3",
+        "name": "Argentinos Juniors",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3.png"
+      },
+      {
+        "id": "9785",
+        "name": "Atlético Tucumán",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/9785.png"
+      },
+      {
+        "id": "235",
+        "name": "Banfield",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/235.png"
+      },
+      {
+        "id": "10060",
+        "name": "Barracas Central",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/10060.png"
+      },
+      {
+        "id": "4",
+        "name": "Belgrano (Córdoba)",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4.png"
+      },
+      {
+        "id": "5",
+        "name": "Boca Juniors",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5.png"
+      },
+      {
+        "id": "11989",
+        "name": "Central Córdoba (Santiago del Estero)",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11989.png"
+      },
+      {
+        "id": "8950",
+        "name": "Defensa y Justicia",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/8950.png"
+      },
+      {
+        "id": "17702",
+        "name": "Deportivo Riestra",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/17702.png"
+      },
+      {
+        "id": "8",
+        "name": "Estudiantes de La Plata",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/8.png"
+      },
+      {
+        "id": "19685",
+        "name": "Estudiantes de Río Cuarto",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/19685.png"
+      },
+      {
+        "id": "11972",
+        "name": "Gimnasia (Mendoza)",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11972.png"
+      },
+      {
+        "id": "9",
+        "name": "Gimnasia La Plata",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/9.png"
+      },
+      {
+        "id": "10",
+        "name": "Huracán",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/10.png"
+      },
+      {
+        "id": "11",
+        "name": "Independiente",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11.png"
+      },
+      {
+        "id": "9744",
+        "name": "Independiente Rivadavia",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/9744.png"
+      },
+      {
+        "id": "2975",
+        "name": "Instituto (Córdoba)",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2975.png"
+      },
+      {
+        "id": "12",
+        "name": "Lanús",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/12.png"
+      },
+      {
+        "id": "14",
+        "name": "Newell's Old Boys",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/14.png"
+      },
+      {
+        "id": "7764",
+        "name": "Platense",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7764.png"
+      },
+      {
+        "id": "15",
+        "name": "Racing Club",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/15.png"
+      },
+      {
+        "id": "16",
+        "name": "River Plate",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/16.png"
+      },
+      {
+        "id": "17",
+        "name": "Rosario Central",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/17.png"
+      },
+      {
+        "id": "18",
+        "name": "San Lorenzo",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/18.png"
+      },
+      {
+        "id": "10158",
+        "name": "Sarmiento (Junín)",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/10158.png"
+      },
+      {
+        "id": "19",
+        "name": "Talleres (Córdoba)",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/19.png"
+      },
+      {
+        "id": "7767",
+        "name": "Tigre",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7767.png"
+      },
+      {
+        "id": "20",
+        "name": "Unión (Santa Fe)",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20.png"
+      },
+      {
+        "id": "21",
+        "name": "Vélez Sarsfield",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/21.png"
+      }
+    ]
+  },
+  {
+    "code": "bol.1",
+    "label": "Bolivia",
+    "teams": [
+      {
+        "id": "130875",
+        "name": "ABB",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/130875.png"
+      },
+      {
+        "id": "19425",
+        "name": "Always Ready",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/19425.png"
+      },
+      {
+        "id": "6046",
+        "name": "Aurora",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/6046.png"
+      },
+      {
+        "id": "6047",
+        "name": "Blooming",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/6047.png"
+      },
+      {
+        "id": "2681",
+        "name": "Bolívar",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2681.png"
+      },
+      {
+        "id": "22174",
+        "name": "GV San José",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/22174.png"
+      },
+      {
+        "id": "9497",
+        "name": "Guabirá",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/9497.png"
+      },
+      {
+        "id": "20889",
+        "name": "Independiente Petrolero",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20889.png"
+      },
+      {
+        "id": "10311",
+        "name": "Nacional Potosí",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/10311.png"
+      },
+      {
+        "id": "2682",
+        "name": "Oriente Petrolero",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2682.png"
+      },
+      {
+        "id": "22523",
+        "name": "Real Oruro",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/22523.png"
+      },
+      {
+        "id": "6051",
+        "name": "Real Potosí",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/6051.png"
+      },
+      {
+        "id": "20890",
+        "name": "Real Tomayapo",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20890.png"
+      },
+      {
+        "id": "22137",
+        "name": "San Antonio Bulo Bulo",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/22137.png"
+      },
+      {
+        "id": "2687",
+        "name": "The Strongest",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2687.png"
+      },
+      {
+        "id": "21379",
+        "name": "Universitario de Vinto",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/21379.png"
+      }
+    ]
+  },
+  {
+    "code": "bra.1",
+    "label": "Brasil",
+    "teams": [
+      {
+        "id": "3458",
+        "name": "Athletico-PR",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3458.png"
+      },
+      {
+        "id": "7632",
+        "name": "Atlético-MG",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7632.png"
+      },
+      {
+        "id": "9967",
+        "name": "Bahia",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/9967.png"
+      },
+      {
+        "id": "6086",
+        "name": "Botafogo",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/6086.png"
+      },
+      {
+        "id": "9318",
+        "name": "Chapecoense",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/9318.png"
+      },
+      {
+        "id": "874",
+        "name": "Corinthians",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/874.png"
+      },
+      {
+        "id": "3456",
+        "name": "Coritiba",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3456.png"
+      },
+      {
+        "id": "2022",
+        "name": "Cruzeiro",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2022.png"
+      },
+      {
+        "id": "819",
+        "name": "Flamengo",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/819.png"
+      },
+      {
+        "id": "3445",
+        "name": "Fluminense",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3445.png"
+      },
+      {
+        "id": "6273",
+        "name": "Grêmio",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/6273.png"
+      },
+      {
+        "id": "1936",
+        "name": "Internacional",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1936.png"
+      },
+      {
+        "id": "9169",
+        "name": "Mirassol",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/9169.png"
+      },
+      {
+        "id": "2029",
+        "name": "Palmeiras",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2029.png"
+      },
+      {
+        "id": "6079",
+        "name": "Red Bull Bragantino",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/6079.png"
+      },
+      {
+        "id": "4936",
+        "name": "Remo",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4936.png"
+      },
+      {
+        "id": "2674",
+        "name": "Santos",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2674.png"
+      },
+      {
+        "id": "2026",
+        "name": "São Paulo",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2026.png"
+      },
+      {
+        "id": "3454",
+        "name": "Vasco da Gama",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3454.png"
+      },
+      {
+        "id": "3457",
+        "name": "Vitória",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3457.png"
+      }
+    ]
+  },
+  {
+    "code": "chi.1",
+    "label": "Chile",
+    "teams": [
+      {
+        "id": "4138",
+        "name": "Audax Italiano",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4138.png"
+      },
+      {
+        "id": "4133",
+        "name": "Cobresal",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4133.png"
+      },
+      {
+        "id": "2688",
+        "name": "Colo Colo",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2688.png"
+      },
+      {
+        "id": "8186",
+        "name": "Coquimbo Unido",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/8186.png"
+      },
+      {
+        "id": "8110",
+        "name": "Deportes Concepcion",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/8110.png"
+      },
+      {
+        "id": "19195",
+        "name": "Deportes Limache",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/19195.png"
+      },
+      {
+        "id": "4129",
+        "name": "Everton CD",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4129.png"
+      },
+      {
+        "id": "4134",
+        "name": "Huachipato",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4134.png"
+      },
+      {
+        "id": "4137",
+        "name": "La Serena",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4137.png"
+      },
+      {
+        "id": "6072",
+        "name": "O'Higgins",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/6072.png"
+      },
+      {
+        "id": "4422",
+        "name": "Palestino",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4422.png"
+      },
+      {
+        "id": "885",
+        "name": "Universidad Católica",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/885.png"
+      },
+      {
+        "id": "4139",
+        "name": "Universidad de Chile",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4139.png"
+      },
+      {
+        "id": "5362",
+        "name": "Universidad de Concepción",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5362.png"
+      },
+      {
+        "id": "10144",
+        "name": "Unión La Calera",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/10144.png"
+      },
+      {
+        "id": "7427",
+        "name": "Ñublense",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7427.png"
+      }
+    ]
+  },
+  {
+    "code": "col.1",
+    "label": "Colombia",
+    "teams": [
+      {
+        "id": "9761",
+        "name": "Alianza FC",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/9761.png"
+      },
+      {
+        "id": "8109",
+        "name": "América de Cali",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/8109.png"
+      },
+      {
+        "id": "6137",
+        "name": "Atlético Bucaramanga",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/6137.png"
+      },
+      {
+        "id": "4815",
+        "name": "Atlético Junior",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4815.png"
+      },
+      {
+        "id": "5264",
+        "name": "Atlético Nacional",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5264.png"
+      },
+      {
+        "id": "5480",
+        "name": "Boyacá Chicó FC",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5480.png"
+      },
+      {
+        "id": "6101",
+        "name": "Cúcuta Deportivo",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/6101.png"
+      },
+      {
+        "id": "5489",
+        "name": "Deportes Tolima",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5489.png"
+      },
+      {
+        "id": "2672",
+        "name": "Deportivo Cali",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2672.png"
+      },
+      {
+        "id": "5485",
+        "name": "Deportivo Pasto",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5485.png"
+      },
+      {
+        "id": "5486",
+        "name": "Deportivo Pereira",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5486.png"
+      },
+      {
+        "id": "4928",
+        "name": "Fortaleza CEIF",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4928.png"
+      },
+      {
+        "id": "2690",
+        "name": "Independiente Medellín",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2690.png"
+      },
+      {
+        "id": "5488",
+        "name": "Independiente Santa Fe",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5488.png"
+      },
+      {
+        "id": "7445",
+        "name": "Internacional de Bogotá",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7445.png"
+      },
+      {
+        "id": "10309",
+        "name": "Jaguares de Córdoba",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/10309.png"
+      },
+      {
+        "id": "7915",
+        "name": "Llaneros FC",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7915.png"
+      },
+      {
+        "id": "5484",
+        "name": "Millonarios",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5484.png"
+      },
+      {
+        "id": "2919",
+        "name": "Once Caldas",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2919.png"
+      },
+      {
+        "id": "9762",
+        "name": "Águilas Doradas",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/9762.png"
+      }
+    ]
+  },
+  {
+    "code": "ecu.1",
+    "label": "Ecuador",
+    "teams": [
+      {
+        "id": "6017",
+        "name": "Aucas",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/6017.png"
+      },
+      {
+        "id": "2686",
+        "name": "Barcelona SC",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2686.png"
+      },
+      {
+        "id": "1011",
+        "name": "Delfín",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1011.png"
+      },
+      {
+        "id": "4812",
+        "name": "Deportivo Cuenca",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4812.png"
+      },
+      {
+        "id": "2668",
+        "name": "Emelec",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2668.png"
+      },
+      {
+        "id": "11124",
+        "name": "Guayaquil City FC",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11124.png"
+      },
+      {
+        "id": "17086",
+        "name": "Independiente del Valle",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/17086.png"
+      },
+      {
+        "id": "131702",
+        "name": "Leones",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/131702.png"
+      },
+      {
+        "id": "21843",
+        "name": "Libertad (Ecuador)",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/21843.png"
+      },
+      {
+        "id": "4816",
+        "name": "Liga de Quito",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4816.png"
+      },
+      {
+        "id": "18439",
+        "name": "Macará",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/18439.png"
+      },
+      {
+        "id": "10307",
+        "name": "Manta F.C.",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/10307.png"
+      },
+      {
+        "id": "17176",
+        "name": "Mushuc Runa",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/17176.png"
+      },
+      {
+        "id": "20695",
+        "name": "Orense",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20695.png"
+      },
+      {
+        "id": "9292",
+        "name": "Técnico Universitario",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/9292.png"
+      },
+      {
+        "id": "9283",
+        "name": "Universidad Católica (Quito)",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/9283.png"
+      }
+    ]
+  },
+  {
+    "code": "par.1",
+    "label": "Paraguay",
+    "teams": [
+      {
+        "id": "6097",
+        "name": "2 de Mayo",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/6097.png"
+      },
+      {
+        "id": "2671",
+        "name": "Cerro Porteño",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2671.png"
+      },
+      {
+        "id": "2675",
+        "name": "Club Olimpia",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2675.png"
+      },
+      {
+        "id": "22517",
+        "name": "Deportivo Recoleta",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/22517.png"
+      },
+      {
+        "id": "7385",
+        "name": "Guaraní",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7385.png"
+      },
+      {
+        "id": "2670",
+        "name": "Libertad",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2670.png"
+      },
+      {
+        "id": "5584",
+        "name": "Nacional Asunción",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5584.png"
+      },
+      {
+        "id": "10080",
+        "name": "Rubio Ñú",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/10080.png"
+      },
+      {
+        "id": "21313",
+        "name": "Sportivo Ameliano",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/21313.png"
+      },
+      {
+        "id": "5583",
+        "name": "Sportivo Luqueño",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5583.png"
+      },
+      {
+        "id": "17671",
+        "name": "Sportivo San Lorenzo",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/17671.png"
+      },
+      {
+        "id": "7466",
+        "name": "Sportivo Trinidense",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7466.png"
+      }
+    ]
+  },
+  {
+    "code": "per.1",
+    "label": "Perú",
+    "teams": [
+      {
+        "id": "21314",
+        "name": "ADT",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/21314.png"
+      },
+      {
+        "id": "5267",
+        "name": "Alianza Atlético",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5267.png"
+      },
+      {
+        "id": "2680",
+        "name": "Alianza Lima",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2680.png"
+      },
+      {
+        "id": "20293",
+        "name": "Atlético Grau",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20293.png"
+      },
+      {
+        "id": "3372",
+        "name": "Cienciano del Cusco",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3372.png"
+      },
+      {
+        "id": "18153",
+        "name": "Comerciantes Unidos",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/18153.png"
+      },
+      {
+        "id": "11995",
+        "name": "Cusco FC",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11995.png"
+      },
+      {
+        "id": "21819",
+        "name": "Deportivo Garcilaso",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/21819.png"
+      },
+      {
+        "id": "131654",
+        "name": "Deportivo Moquegua",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/131654.png"
+      },
+      {
+        "id": "131655",
+        "name": "FC Cajamarca",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/131655.png"
+      },
+      {
+        "id": "22534",
+        "name": "Juan Pablo II",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/22534.png"
+      },
+      {
+        "id": "22168",
+        "name": "Los Chankas",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/22168.png"
+      },
+      {
+        "id": "7312",
+        "name": "Melgar",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7312.png"
+      },
+      {
+        "id": "5570",
+        "name": "Sport Boys",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5570.png"
+      },
+      {
+        "id": "10318",
+        "name": "Sport Huancayo",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/10318.png"
+      },
+      {
+        "id": "2673",
+        "name": "Sporting Cristal",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2673.png"
+      },
+      {
+        "id": "10122",
+        "name": "UTC",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/10122.png"
+      },
+      {
+        "id": "2685",
+        "name": "Universitario",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2685.png"
+      }
+    ]
+  },
+  {
+    "code": "uru.1",
+    "label": "Uruguay",
+    "teams": [
+      {
+        "id": "21403",
+        "name": "Albion FC",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/21403.png"
+      },
+      {
+        "id": "9999",
+        "name": "Boston River",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/9999.png"
+      },
+      {
+        "id": "131688",
+        "name": "Central Español Fútbol Club",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/131688.png"
+      },
+      {
+        "id": "5490",
+        "name": "Cerro",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5490.png"
+      },
+      {
+        "id": "9902",
+        "name": "Cerro Largo",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/9902.png"
+      },
+      {
+        "id": "4817",
+        "name": "Danubio",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4817.png"
+      },
+      {
+        "id": "1007",
+        "name": "Defensor Sporting",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1007.png"
+      },
+      {
+        "id": "10000",
+        "name": "Deportivo Maldonado",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/10000.png"
+      },
+      {
+        "id": "8416",
+        "name": "Juventud",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/8416.png"
+      },
+      {
+        "id": "5492",
+        "name": "Liverpool",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5492.png"
+      },
+      {
+        "id": "19002",
+        "name": "Montevideo City Torque",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/19002.png"
+      },
+      {
+        "id": "5501",
+        "name": "Montevideo Wanderers",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5501.png"
+      },
+      {
+        "id": "2684",
+        "name": "Nacional",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2684.png"
+      },
+      {
+        "id": "2683",
+        "name": "Peñarol",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2683.png"
+      },
+      {
+        "id": "6866",
+        "name": "Progreso",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/6866.png"
+      },
+      {
+        "id": "9903",
+        "name": "Racing (Montevideo)",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/9903.png"
+      }
+    ]
+  },
+  {
+    "code": "ven.1",
+    "label": "Venezuela",
+    "teams": [
+      {
+        "id": "18995",
+        "name": "Academia Puerto Cabello",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/18995.png"
+      },
+      {
+        "id": "13783",
+        "name": "Anzoátegui FC",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/13783.png"
+      },
+      {
+        "id": "6037",
+        "name": "Carabobo",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/6037.png"
+      },
+      {
+        "id": "4811",
+        "name": "Caracas FC",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4811.png"
+      },
+      {
+        "id": "17090",
+        "name": "Deportivo La Guaira",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/17090.png"
+      },
+      {
+        "id": "4818",
+        "name": "Deportivo Táchira",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4818.png"
+      },
+      {
+        "id": "6038",
+        "name": "Estudiantes de Mérida",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/6038.png"
+      },
+      {
+        "id": "13481",
+        "name": "Metropolitanos",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/13481.png"
+      },
+      {
+        "id": "6041",
+        "name": "Monagas SC",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/6041.png"
+      },
+      {
+        "id": "6762",
+        "name": "Portuguesa",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/6762.png"
+      },
+      {
+        "id": "21850",
+        "name": "Rayo Zuliano",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/21850.png"
+      },
+      {
+        "id": "5268",
+        "name": "Trujillanos",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5268.png"
+      },
+      {
+        "id": "10094",
+        "name": "UCV FC",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/10094.png"
+      },
+      {
+        "id": "6763",
+        "name": "Zamora FC",
+        "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/6763.png"
+      }
+    ]
+  }
+]
