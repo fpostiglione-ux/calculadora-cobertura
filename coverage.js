@@ -69,13 +69,48 @@
     }));
   }
 
-  function mixed({ total, odds, favorite, format = 'single' }) {
+  function mixed({ total, odds, favorite, format = 'single', mode = 'balanced', first = 'd' }) {
     const cents = budgetInCents(total);
     validateOdds(odds, mixedKeys);
     const scenarios = mixedScenarios(favorite, format);
     const opponent = favorite === 'h' ? 'a' : 'h';
     const qualification = 'q' + opponent;
     const empty = () => ({ h: 0, d: 0, a: 0, qh: 0, qa: 0 });
+    if (!['recovery', 'balanced'].includes(mode)) throw new Error('Elegí una estrategia válida.');
+    if (mode === 'recovery' && !['d', opponent].includes(first)) {
+      throw new Error('Elegí un desenlace de eliminación para recuperar primero.');
+    }
+    const second = first === 'd' ? opponent : 'd';
+    const minimumNet = candidate => Math.min(...candidate.scenarios.filter(scenario => !scenario.accepted).map(scenario => scenario.net));
+
+    if (mode === 'recovery') {
+      // The primary scenario must recover the budget. Its payout is funded
+      // either through its match-result bet or through opponent qualification.
+      // Along that break-even constraint, the other scenario's continuous
+      // payout is linear, so compare both endpoints and put the remainder in
+      // the secondary match result. Round the primary stake upward only as
+      // much as necessary to recover the total after settlement in cents.
+      const candidates = [qualification, first].map(primaryMarket => {
+        let stake = Math.ceil((cents - .5) / odds[primaryMarket]);
+        while (Math.round(stake * odds[primaryMarket]) < cents) stake++;
+        while (stake > 0 && Math.round((stake - 1) * odds[primaryMarket]) >= cents) stake--;
+        const stakes = empty();
+        stakes[primaryMarket] = stake;
+        stakes[second] = cents - stake;
+        return {
+          ...evaluate(cents, odds, stakes, scenarios),
+          allocationType: primaryMarket === qualification ? 'qualification-and-result' : 'result',
+          primaryMarket
+        };
+      });
+      const secondaryNet = candidate => candidate.scenarios.find(scenario => scenario.id === second + ':' + opponent).net;
+      const best = candidates.reduce((current, candidate) => secondaryNet(candidate) > secondaryNet(current) + .0001 ? candidate : current);
+      return {
+        ...best, favorite, format, mode, first, second,
+        minimumCoveredNet: minimumNet(best),
+        maximumAcceptedLoss: Math.max(0, -Math.min(...best.scenarios.filter(scenario => scenario.accepted).map(scenario => scenario.net)))
+      };
+    }
 
     // Only these two states require compensation: opponent wins and advances,
     // or draw and opponent advances. Favorite-win and favorite-qualification
@@ -96,13 +131,13 @@
       stakes.d = cents - first;
       candidates.push({ ...evaluate(cents, odds, stakes, scenarios), allocationType: 'result' });
     }
-    const score = candidate => Math.min(...candidate.scenarios.filter(scenario => !scenario.accepted).map(scenario => scenario.net));
-    const best = candidates.reduce((current, candidate) => score(candidate) > score(current) + 0.0001 ? candidate : current);
+    const best = candidates.reduce((current, candidate) => minimumNet(candidate) > minimumNet(current) + 0.0001 ? candidate : current);
     return {
       ...best,
       favorite,
       format,
-      minimumCoveredNet: score(best),
+      mode,
+      minimumCoveredNet: minimumNet(best),
       maximumAcceptedLoss: Math.max(0, -Math.min(...best.scenarios.filter(scenario => scenario.accepted).map(scenario => scenario.net)))
     };
   }
