@@ -39,6 +39,11 @@
     return names[key] + ' gana';
   }
   function resultName(names, result) { return result === 'd' ? 'Empate' : 'Gana ' + names[result]; }
+  function qualificationCase(names, result, qualifier) {
+    if (result === 'd') return 'empatan y pasa ' + names[qualifier];
+    if (result === qualifier) return names[result] + ' gana y pasa';
+    return names[result] + ' gana y pasa ' + names[qualifier];
+  }
   function selectByValueOrName(select, raw) {
     const target = teamAliases[raw] || raw;
     const match = [...select.options].find(option => option.value === raw)
@@ -185,21 +190,27 @@
       ? 'Se contemplan ambos clasificados para cada resultado, sin cargar el global. Aceptás perder si tu equipo gana el partido o pasa de ronda.'
       : 'Si un equipo gana en los 90 minutos, clasifica. Si empatan, se contemplan ambos clasificados.';
     const favorite = labelFor($('favorite').value);
-    $('mixedHint').textContent = `La pérdida queda aceptada si ${favorite} gana o clasifica. La estrategia elegida cubre los demás desenlaces.`;
+    $('mixedHint').textContent = `Tu equipo: ${favorite}.`;
     for (const [id, active] of [['recovery', mode === 'recovery'], ['balanced', mode === 'balanced']]) {
       $(id).classList.toggle('active', active);
       $(id).setAttribute('aria-pressed', String(active));
     }
     if (mixed) {
-      const first = $('mixedFirst').value === 'd' ? 'hay empate y clasifica el rival' : 'el rival gana y clasifica';
-      const second = $('mixedFirst').value === 'd' ? 'el rival gana y clasifica' : 'hay empate y clasifica el rival';
+      const opponent = $('favorite').value === 'h' ? 'a' : 'h';
+      const names = { h: labelFor('h'), a: labelFor('a') };
+      for (const option of $('mixedFirst').options) {
+        const caption = qualificationCase(names, option.value === 'd' ? 'd' : opponent, opponent);
+        option.textContent = caption[0].toUpperCase() + caption.slice(1);
+        option.title = option.textContent;
+      }
       $('strategyhint').textContent = mode === 'recovery'
-        ? `Primero recuperás lo apostado si ${first}. El resto busca una mayor compensación si ${second}.`
-        : 'Buscás el mismo saldo si el rival gana o empata y, en ambos casos, clasifica. Se comparan las cuotas de resultado y clasificación.';
+        ? 'En ese caso recuperás lo apostado. En el otro caso de eliminación, el cálculo busca una ganancia mayor.'
+        : `Buscás cobrar lo mismo si pasa ${names[opponent]}, tanto si gana el partido como si empatan.`;
     } else {
+      const caption = key => key === 'd' ? 'hay empate' : labelFor(key) + ' gana';
       $('strategyhint').textContent = mode === 'recovery'
-        ? 'Primer resultado: buscás recuperar el total apostado, con redondeo a centavos. El resto va al segundo resultado.'
-        : 'Repartís la inversión para cobrar lo mismo si ocurre cualquiera de los dos resultados cubiertos. Puede haber ganancia o pérdida.';
+        ? `Buscás recuperar todo si ${caption($('pick1').value)}. Si ${caption($('pick2').value)}, el objetivo es ganar más.`
+        : 'Buscás cobrar lo mismo con cualquiera de los dos resultados elegidos.';
     }
   }
   function readCalculation() {
@@ -246,16 +257,14 @@
     }).join('');
     if (calculation.coverageType === 'mixed') {
       const minimum = calculation.minimumCoveredNet;
-      const chosen = calculation.mode === 'recovery'
-        ? `Recuperás con «${escapeHTML(marketName(calculation.primaryMarket, names))}» y destinás el resto a «${escapeHTML(marketName(calculation.second, names))}».`
-        : calculation.allocationType === 'qualification'
-          ? 'Con estas cuotas, apostar a la clasificación del rival equilibra mejor ambos desenlaces.'
-          : 'Con estas cuotas, repartir entre el triunfo del rival y el empate equilibra mejor ambos desenlaces.';
-      const netFor = result => scenarios.find(scenario => !scenario.accepted && scenario.result === result).net;
-      const coveredSummary = calculation.mode === 'recovery'
-        ? `Primer desenlace cubierto: saldo <strong>${signedMoney(netFor(calculation.first))}</strong>.<br>Segundo desenlace cubierto: saldo <strong>${signedMoney(netFor(calculation.second))}</strong>.`
-        : `Si tu equipo no gana y queda eliminado: saldo mínimo <strong>${signedMoney(minimum)}</strong>.`;
-      $('warning').innerHTML = `<div class="notice ${minimum >= -.005 ? 'ok' : ''}">${chosen}<br>${coveredSummary}<br>Si gana o clasifica: pérdida máxima <strong>${money(calculation.maximumAcceptedLoss)}</strong>.</div>`;
+      const covered = calculation.mode === 'recovery'
+        ? [calculation.first, calculation.second].map(result => scenarios.find(scenario => !scenario.accepted && scenario.result === result))
+        : scenarios.filter(scenario => !scenario.accepted);
+      const summary = covered.map(scenario => {
+        const outcome = Math.abs(scenario.net) < .005 ? `Recuperás ${money(calculation.total)}` : scenario.net > 0 ? `Ganás ${money(scenario.net)}` : `Perdés ${money(-scenario.net)}`;
+        return `<div class="coverage-case"><span>Si ${escapeHTML(qualificationCase(names, scenario.result, scenario.qualifier))}:</span><strong>${outcome}</strong></div>`;
+      }).join('');
+      $('warning').innerHTML = `<div class="notice ${minimum >= -.005 ? 'ok' : ''}">${summary}<div class="coverage-risk">Si ${escapeHTML(names[calculation.favorite])} gana o pasa, aceptás perder hasta <strong>${money(calculation.maximumAcceptedLoss)}</strong>.</div></div>`;
     } else {
       const protectedScenarios = scenarios.filter(scenario => !scenario.accepted);
       const covered = protectedScenarios.every(scenario => scenario.net >= -.005);
