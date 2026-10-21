@@ -124,3 +124,71 @@ test('qualification requires both prices, while standard mode ignores hidden qua
   assert.doesNotThrow(() => standard({ total: 60000, odds, first: 'd', second: 'a' }));
   assert.throws(() => standard({ total: 60000, odds, first: 'd', second: 'd' }));
 });
+
+test('mixed recovery restores break-even on the selected scenario and differs from balancing', () => {
+  const recovery = mixed({ total: 10000, odds: screenshotOdds, favorite: 'a', mode: 'recovery', first: 'd' });
+  const balanced = mixed({ total: 10000, odds: screenshotOdds, favorite: 'a', mode: 'balanced' });
+  assert.deepEqual(recovery.stakes, { h: 1666.67, d: 0, a: 0, qh: 8333.33, qa: 0 });
+  assert.equal(recovery.mode, 'recovery');
+  assert.equal(recovery.scenarios.find(s => s.id === 'd:h').net, 0);
+  assert.equal(recovery.scenarios.find(s => s.id === 'h:h').net, 2283.34);
+  assert.equal(recovery.scenarios.find(s => s.id === 'd:a').net, -10000);
+  assert.equal(balanced.scenarios.find(s => s.id === 'd:h').net, 2000);
+  assert.equal(balanced.scenarios.find(s => s.id === 'h:h').net, 2000);
+});
+
+test('mixed recovery can reverse which elimination outcome recovers the budget first', () => {
+  const result = mixed({ total: 10000, odds: screenshotOdds, favorite: 'a', mode: 'recovery', first: 'h' });
+  assert.deepEqual(result.stakes, { h: 0, d: 1666.67, a: 0, qh: 8333.33, qa: 0 });
+  assert.equal(result.first, 'h');
+  assert.equal(result.second, 'd');
+  assert.equal(result.scenarios.find(s => s.id === 'h:h').net, 0);
+  assert.equal(result.scenarios.find(s => s.id === 'd:h').net, 7333.35);
+});
+
+test('mixed recovery uses match results when they leave a higher secondary payout', () => {
+  const result = mixed({ total: 10000, odds: { h: 4, d: 4, a: 2, qh: 1.5, qa: 2 }, favorite: 'a', mode: 'recovery', first: 'd' });
+  assert.deepEqual(result.stakes, { h: 7500, d: 2500, a: 0, qh: 0, qa: 0 });
+  assert.equal(result.scenarios.find(s => s.id === 'd:h').net, 0);
+  assert.equal(result.scenarios.find(s => s.id === 'h:h').net, 20000);
+});
+
+test('mixed recovery conserves small budgets and covers the selected outcome for either team', () => {
+  for (const favorite of ['h', 'a']) {
+    const opponent = favorite === 'h' ? 'a' : 'h';
+    for (const first of ['d', opponent]) {
+      for (const total of [.01, .02, .03, 1.01, 10000.01]) {
+        const result = mixed({ total, odds: screenshotOdds, favorite, first, mode: 'recovery', format: 'tie' });
+        assert.equal(Object.values(result.stakes).reduce((sum, stake) => sum + cents(stake), 0), cents(total));
+        assert.ok(Object.values(result.stakes).every(stake => stake >= 0));
+        assert.ok(result.scenarios.find(s => s.id === first + ':' + opponent).net >= 0);
+        assert.ok(result.minimumCoveredNet >= 0);
+      }
+    }
+  }
+});
+
+test('mixed recovery respects its target and the analytical secondary payout across varied odds', () => {
+  let seed = 8871;
+  const random = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 2 ** 32);
+  for (let iteration = 0; iteration < 200; iteration++) {
+    const odds = Object.fromEntries(['h', 'd', 'a', 'qh', 'qa'].map(key => [key, 1.01 + Math.floor(random() * 2000) / 100]));
+    const favorite = iteration % 2 ? 'h' : 'a';
+    const opponent = favorite === 'h' ? 'a' : 'h';
+    const first = iteration % 3 ? 'd' : opponent;
+    const second = first === 'd' ? opponent : 'd';
+    const total = (1 + Math.floor(random() * 10000000)) / 100;
+    const result = mixed({ total, odds, favorite, first, mode: 'recovery' });
+    const firstResultNet = total * (1 - 1 / odds[first]) * odds[second] - total;
+    const firstQualificationNet = total * (1 - 1 / odds['q' + opponent]) * odds[second];
+    const secondaryNet = result.scenarios.find(s => s.id === second + ':' + opponent).net;
+    near(secondaryNet, Math.max(firstResultNet, firstQualificationNet), Math.max(...Object.values(odds)) / 100 + .02);
+    assert.ok(result.scenarios.find(s => s.id === first + ':' + opponent).net >= 0);
+    assert.equal(Object.values(result.stakes).reduce((sum, stake) => sum + cents(stake), 0), cents(total));
+  }
+});
+
+test('mixed recovery rejects a favorable outcome as the recovery target or an unknown strategy', () => {
+  assert.throws(() => mixed({ total: 10000, odds: screenshotOdds, favorite: 'a', mode: 'recovery', first: 'a' }));
+  assert.throws(() => mixed({ total: 10000, odds: screenshotOdds, favorite: 'a', mode: 'other' }));
+});

@@ -19,7 +19,7 @@
   const leagueSources = [['arg.1', 'Argentina'], ['bol.1', 'Bolivia'], ['bra.1', 'Brasil'], ['chi.1', 'Chile'], ['col.1', 'Colombia'], ['ecu.1', 'Ecuador'], ['par.1', 'Paraguay'], ['per.1', 'Perú'], ['uru.1', 'Uruguay'], ['ven.1', 'Venezuela']];
   const fallbackClubs = ['Aldosivi', 'Argentinos Juniors', 'Atlético Tucumán', 'Banfield', 'Barracas Central', 'Belgrano', 'Boca Juniors', 'Central Córdoba (SdE)', 'Defensa y Justicia', 'Deportivo Riestra', 'Estudiantes (LP)', 'Estudiantes (RC)', 'Gimnasia (LP)', 'Gimnasia (Mza)', 'Huracán', 'Independiente', 'Independiente Rivadavia', 'Instituto', 'Lanús', 'Newell’s', 'Platense', 'Racing Club', 'River Plate', 'Rosario Central', 'San Lorenzo', 'Sarmiento', 'Talleres', 'Tigre', 'Unión', 'Vélez Sarsfield'];
   const teamAliases = { 'Gimnasia (LP)': 'Gimnasia La Plata', 'Estudiantes (LP)': 'Estudiantes de La Plata', 'Central Córdoba (SdE)': 'Central Córdoba (Santiago del Estero)', 'Newell’s': "Newell's Old Boys" };
-  const ids = ['home', 'away', 'customh', 'customa', 'oh', 'od', 'oa', 'qh', 'qa', 'total', 'pick1', 'pick2', 'favorite', 'format'];
+  const ids = ['home', 'away', 'customh', 'customa', 'oh', 'od', 'oa', 'qh', 'qa', 'total', 'pick1', 'pick2', 'favorite', 'format', 'mixedFirst'];
   let mode = 'recovery';
   let bets = [];
   let currentCalculation = null;
@@ -115,6 +115,7 @@
       $('includeQualification').checked = data.includeQualification === true;
       if (!['h', 'a'].includes($('favorite').value)) $('favorite').value = 'a';
       if (!['single', 'tie'].includes($('format').value)) $('format').value = 'single';
+      if (!['d', 'r'].includes($('mixedFirst').value)) $('mixedFirst').value = 'd';
       formatTotal();
     } catch (_) { /* Ignore damaged saved form data. */ }
   }
@@ -161,7 +162,10 @@
       const net = Number(bet.net) || 0;
       const statusClass = pending ? 'pending' : net > .005 ? 'won' : net < -.005 ? 'lost' : 'push';
       const statusText = pending ? 'Pendiente' : statusClass === 'won' ? 'Ganada' : statusClass === 'lost' ? 'Perdida' : 'Recuperada';
-      const strategy = bet.coverageType === 'mixed' ? 'Resultado + clasificación' : bet.mode === 'balanced' ? 'Equilibrar' : 'Recuperar';
+      // Mixed bets saved before strategy selection was restored used balancing,
+      // even though their legacy `mode` field held the standard-form setting.
+      const strategyMode = bet.coverageType === 'mixed' ? bet.strategyMode || 'balanced' : bet.mode;
+      const strategy = (bet.coverageType === 'mixed' ? 'Resultado + clasificación · ' : '') + (strategyMode === 'balanced' ? 'Equilibrar' : 'Recuperar');
       const options = bet.coverageType === 'mixed' ? bet.scenarios.map(scenario => [scenario.id, outcomeName(bet, scenario.id)]) : [['h', bet.home], ['d', 'Empate'], ['a', bet.away]];
       const stakes = bet.coverageType === 'mixed' ? `<div class="bet-meta">${Object.entries(bet.stakes).filter(([, stake]) => stake > 0).map(([key, stake]) => escapeHTML(marketName(key, { h: bet.home, a: bet.away })) + ': ' + money(stake)).join(' · ')}</div>` : '';
       return `<article class="bet-item"><div class="bet-head"><div class="bet-match">${escapeHTML(bet.home)} vs. ${escapeHTML(bet.away)}</div><span class="badge ${statusClass}">${statusText}</span></div><div class="bet-meta">${dateLabel(bet.createdAt)} · ${strategy} · Apostado ${money(Number(bet.total) || 0)}</div>${stakes}${pending ? `<div class="settle"><select data-result-for="${safeId}" aria-label="Resultado de ${escapeHTML(bet.home)} contra ${escapeHTML(bet.away)}"><option value="">Resultado real…</option>${options.map(([key, label]) => `<option value="${escapeHTML(key)}">${escapeHTML(label)}</option>`).join('')}</select><button type="button" data-close-bet="${safeId}" disabled>Cerrar</button></div>` : `<div class="settled-line"><span>${escapeHTML(outcomeName(bet, bet.outcome))}</span><strong class="${netClass(net)}">${signedMoney(net)}</strong></div>`}<div class="bet-actions"><button type="button" class="delete-bet" data-delete-bet="${safeId}">Eliminar apuesta</button></div></article>`;
@@ -172,22 +176,31 @@
     $('qualificationFields').hidden = !mixed;
     $('standardPicks').hidden = mixed;
     $('mixedPicks').hidden = !mixed;
-    $('standardStrategy').hidden = mixed;
+    $('standardStrategy').hidden = false;
     $('mixedStrategy').hidden = !mixed;
-    $('strategyTitle').textContent = mixed ? '3. Cobertura de mi equipo' : '3. Estrategia';
+    $('mixedPriority').hidden = !mixed || mode !== 'recovery';
+    $('strategyTitle').textContent = '3. Estrategia';
     $('scenarioHelp').hidden = !mixed;
     $('formatHint').textContent = $('format').value === 'tie'
       ? 'Se contemplan ambos clasificados para cada resultado, sin cargar el global. Aceptás perder si tu equipo gana el partido o pasa de ronda.'
       : 'Si un equipo gana en los 90 minutos, clasifica. Si empatan, se contemplan ambos clasificados.';
     const favorite = labelFor($('favorite').value);
-    $('mixedHint').textContent = `Buscamos el mejor saldo mínimo si ${favorite} no gana en los 90 minutos y queda eliminado.`;
+    $('mixedHint').textContent = `La pérdida queda aceptada si ${favorite} gana o clasifica. La estrategia elegida cubre los demás desenlaces.`;
     for (const [id, active] of [['recovery', mode === 'recovery'], ['balanced', mode === 'balanced']]) {
       $(id).classList.toggle('active', active);
       $(id).setAttribute('aria-pressed', String(active));
     }
-    $('strategyhint').textContent = mode === 'recovery'
-      ? 'Primer resultado: buscás recuperar el total apostado, con redondeo a centavos. El resto va al segundo resultado.'
-      : 'Repartís la inversión para cobrar lo mismo si ocurre cualquiera de los dos resultados cubiertos. Puede haber ganancia o pérdida.';
+    if (mixed) {
+      const first = $('mixedFirst').value === 'd' ? 'hay empate y clasifica el rival' : 'el rival gana y clasifica';
+      const second = $('mixedFirst').value === 'd' ? 'el rival gana y clasifica' : 'hay empate y clasifica el rival';
+      $('strategyhint').textContent = mode === 'recovery'
+        ? `Primero recuperás lo apostado si ${first}. El resto busca una mayor compensación si ${second}.`
+        : 'Buscás el mismo saldo si el rival gana o empata y, en ambos casos, clasifica. Se comparan las cuotas de resultado y clasificación.';
+    } else {
+      $('strategyhint').textContent = mode === 'recovery'
+        ? 'Primer resultado: buscás recuperar el total apostado, con redondeo a centavos. El resto va al segundo resultado.'
+        : 'Repartís la inversión para cobrar lo mismo si ocurre cualquiera de los dos resultados cubiertos. Puede haber ganancia o pérdida.';
+    }
   }
   function readCalculation() {
     const total = amountValue($('total').value);
@@ -199,7 +212,7 @@
     const names = { h: labelFor('h'), a: labelFor('a') };
     if (norm(names.h) === norm(names.a)) throw new Error('Elegí dos equipos diferentes.');
     const result = isMixed()
-      ? engine.mixed({ total, odds, favorite: $('favorite').value, format: $('format').value })
+      ? engine.mixed({ total, odds, favorite: $('favorite').value, format: $('format').value, mode, first: $('mixedFirst').value === 'd' ? 'd' : $('favorite').value === 'h' ? 'a' : 'h' })
       : engine.standard({ total, odds, first: $('pick1').value, second: $('pick2').value, mode });
     return { ...result, odds, names, coverageType: isMixed() ? 'mixed' : 'standard' };
   }
@@ -233,10 +246,16 @@
     }).join('');
     if (calculation.coverageType === 'mixed') {
       const minimum = calculation.minimumCoveredNet;
-      const chosen = calculation.allocationType === 'qualification'
-        ? 'Con estas cuotas, la clasificación del rival ofrece la mejor cobertura. No hace falta repartir entre varias apuestas.'
-        : 'Con estas cuotas, repartir entre el triunfo del rival y el empate ofrece la mejor cobertura.';
-      $('warning').innerHTML = `<div class="notice ${minimum >= -.005 ? 'ok' : ''}">${chosen}<br>Si tu equipo no gana y queda eliminado: saldo mínimo <strong>${signedMoney(minimum)}</strong>.<br>Si gana o clasifica: pérdida máxima <strong>${money(calculation.maximumAcceptedLoss)}</strong>.</div>`;
+      const chosen = calculation.mode === 'recovery'
+        ? `Recuperás con «${escapeHTML(marketName(calculation.primaryMarket, names))}» y destinás el resto a «${escapeHTML(marketName(calculation.second, names))}».`
+        : calculation.allocationType === 'qualification'
+          ? 'Con estas cuotas, apostar a la clasificación del rival equilibra mejor ambos desenlaces.'
+          : 'Con estas cuotas, repartir entre el triunfo del rival y el empate equilibra mejor ambos desenlaces.';
+      const netFor = result => scenarios.find(scenario => !scenario.accepted && scenario.result === result).net;
+      const coveredSummary = calculation.mode === 'recovery'
+        ? `Primer desenlace cubierto: saldo <strong>${signedMoney(netFor(calculation.first))}</strong>.<br>Segundo desenlace cubierto: saldo <strong>${signedMoney(netFor(calculation.second))}</strong>.`
+        : `Si tu equipo no gana y queda eliminado: saldo mínimo <strong>${signedMoney(minimum)}</strong>.`;
+      $('warning').innerHTML = `<div class="notice ${minimum >= -.005 ? 'ok' : ''}">${chosen}<br>${coveredSummary}<br>Si gana o clasifica: pérdida máxima <strong>${money(calculation.maximumAcceptedLoss)}</strong>.</div>`;
     } else {
       const protectedScenarios = scenarios.filter(scenario => !scenario.accepted);
       const covered = protectedScenarios.every(scenario => scenario.net >= -.005);
@@ -250,13 +269,14 @@
     const now = new Date().toISOString();
     return {
       id: globalThis.crypto?.randomUUID?.() || Date.now().toString(36) + Math.random().toString(36).slice(2),
-      schemaVersion: 2, createdAt: now, updatedAt: now,
+      schemaVersion: 3, createdAt: now, updatedAt: now,
       home: calculation.names.h, away: calculation.names.a,
       total: calculation.total, odds: { ...calculation.odds }, stakes: { ...calculation.stakes },
       nets: Object.fromEntries(calculation.scenarios.map(scenario => [scenario.id, scenario.net])),
       scenarios: calculation.scenarios.map(scenario => ({ ...scenario })),
       coverageType: calculation.coverageType, favorite: calculation.favorite || null, format: calculation.format || null,
-      mode, picks: calculation.coverageType === 'mixed' ? Object.keys(calculation.stakes).filter(key => calculation.stakes[key] > 0) : [$('pick1').value, $('pick2').value],
+      mode, strategyMode: mode, priority: calculation.first || null,
+      picks: calculation.coverageType === 'mixed' ? Object.keys(calculation.stakes).filter(key => calculation.stakes[key] > 0) : [$('pick1').value, $('pick2').value],
       status: 'pending', outcome: null, net: null
     };
   }
@@ -277,7 +297,7 @@
   }
   function resetApp() {
     pendingTeamValues = {};
-    const defaults = { home: 'Huracán', away: 'Gimnasia (LP)', customh: '', customa: '', oh: '2.40', od: '3.00', oa: '3.10', qh: '', qa: '', total: '60.000', pick1: 'd', pick2: 'a', favorite: 'a', format: 'single' };
+    const defaults = { home: 'Huracán', away: 'Gimnasia (LP)', customh: '', customa: '', oh: '2.40', od: '3.00', oa: '3.10', qh: '', qa: '', total: '60.000', pick1: 'd', pick2: 'a', favorite: 'a', format: 'single', mixedFirst: 'd' };
     for (const [id, value] of Object.entries(defaults)) {
       if (id === 'home' || id === 'away') selectByValueOrName($(id), value);
       else $(id).value = value;
